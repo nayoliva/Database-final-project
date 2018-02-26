@@ -1,0 +1,1681 @@
+Data Base Implementation - Part 1 - Due November 7 of 2012
+Student: Nayara Oliva Ferreira
+
+ My assignment is the exctly order
+	Code for tables
+	Code for inserts
+	Selection of all tuples and all atributes of all tables
+	SQL queries with the the English sentence and result display in oracle. 
+
+create table custumer (
+	email		varchar2(25)	not null,
+	birthdate	date,
+	cellphone#	number(10),
+	shippingaddress	varchar2(29)	not null,
+	billingaddress	varchar2(22)	not null,	
+	fname		varchar2(8)	not null,
+	mname		varchar2(8),	
+	lname		varchar2(15)	not null,
+	creditcard#	varchar2(16)	not null,
+	cardsecurity#	varchar2(3)	not null,	
+	cardexpirationd	date		not null,
+	primary key (email));
+create	table product (
+	id		number(3)	not null,
+	title		varchar2(108)	not null,
+	price 		number(7,2)	not null,
+	desription	varchar2(1000),
+	details		varchar2(1000),
+	primary key (id));
+create	table whishlist (
+	quantity	number(3),
+	commentaries	varchar2(1000),
+	received#	number(3),
+	priority	varchar(10),
+	emailw		varchar2(30)	not null,
+	idw		number(3) 	not null,
+	primary key (emailw,idw),
+	foreign key (emailw) references custumer (email),
+	foreign key (idw) references product (id));
+create table buy (
+	quantityb	number(3)	not null,
+	idb		number(3) 	not null,
+	emailb		varchar2(30)	not null,
+	datet		date		not null,
+	primary key (emailb,idb,datet),
+	foreign key (emailb) references custumer (email),
+	foreign key (idb) references product (id));
+create table review(
+	rate		number(1)	not null,	
+	titler		varchar2(200)	not null,
+	comments	varchar2(1000)	not null,
+	idr		number(3) 	not null,
+	emailr		varchar2(30)	not null,
+	primary key (emailr,idr),
+	foreign key (emailr) references custumer (email),
+	foreign key (idr) references product (id));
+
+insert into custumer values 
+('n.poison@hotmail.com','08-FEB-1991',NULL,'Athens Ohio','Athens Ohio','Nayara',NULL,'Oliva Ferreira','1234567890123456','123','15-JAN-2015');
+insert into custumer values 
+('naye.ferreira@hotmail.com','08-FEB-1992',NULL,'Athens Ohio','Athens Ohio','Nagyla','Oliva','Ferreira','1234567890123456','123','16-JAN-2015');
+insert into custumer values 
+('joao@hotmail.com','10-JUN-1980',NULL,'Athens Ohio','Athens Ohio','Joao',NULL,'da Silva','1234567890123456','123','15-JAN-2015');
+insert into custumer values 
+('maria@hotmail.com','15-JUN-1954',NULL,'Campina da Lagoa','Compina da Lagoa BR','Maria','Joana','Oliva Bilesk','1234567856781234','563','05-FEB-2013');
+insert into custumer values 
+('nelson@hotmail.com','27-OCT-1951',NULL,'Campina da Lagoa','Compina da Lagoa BR','Nelson',NULL,'Bilesk','1234567856781234','563','05-FEB-2013');
+insert into custumer values 
+('lais@hotmail.com','30-NOV-1988',NULL,'Campina da Lagoa','Compina da Lagoa BR','Lais',NULL,'Oliva Bilesk','1233567856781234','583','07-FEB-2013');
+insert into custumer values 
+('lucas@hotmail.com','09-JUL-1988',NULL,'Campina da Lagoa','Compina da Lagoa BR','Lucas',NULL,'Oliva Bilesk','0233567856781234','983','14-MAY-2020');
+insert into custumer values 
+('carlos@hotmail.com','13-SEP-1960',NULL,'Maringa Parana BR','Maringa BR','Carlos',NULL,'Ferreira','0000356785678123','083','15-MAY-2014');
+insert into custumer values 
+('ieda@hotmail.com','22-MAR-1962',NULL,'Maringa Parana BR','Maringa BR','Ieda',NULL,'Prates Ferreira','0000351115678123','093','15-MAY-2014');
+insert into custumer values 
+('leonardo@hotmail.com','05-JUN-1992',NULL,'Maringa Parana BR','Maringa BR','Leonardo',NULL,'Prates Ferreira','1000356785678123','783','30-MAY-2015');
+insert into custumer values 
+('carla@hotmail.com','30-OCT-1995',NULL,'Maringa Parana BR','Maringa BR','Carla',NULL,'Prates Ferreira','1200356785678123','703','03-MAR-2013');
+insert into custumer values 
+('pedro@hotmail.com','07-AUG-1972',NULL,'Iretama Parana BR','Iretama BR','Pedro',NULL,'Oliva','2000356785678123','983','21-JUN-2017');
+insert into custumer values 
+('leandra@hotmail.com','11-DEC-1973',NULL,'Compo Mourao Parana BR','Campo Mourao BR','Leandra',NULL,'Oliva ','1220356785678123','787','22-AUG-2015');
+insert into custumer values 
+('paulo@hotmail.com','13-FEB-1975',NULL,'Assis Chateaubriand Parana BR','Assis Chateaubriand BR','Paulo',NULL,'Oliva','1003336785678123','183','15-SEP-2015');
+insert into custumer values 
+('marcela@hotmail.com','01-JAN-1976',NULL,'Assis Chateaubriand Parana BR','Assis Chateaubriand BR','Marcela',NULL,'Valentino','1444436785678123','103','25-DEC-2013');
+insert into custumer values 
+('babye@hotmail.com','27-MAR-1981',NULL,'Campo Mourao Parana BR','Campo Mourao BR','Babye',NULL,'Lindner Munhoz','2203336785678123','340','12-NOV-2017');
+insert into custumer values 
+('thalita@hotmail.com','10-JAN-1983',NULL,'Campo Mourao Parana BR','Campo Mourao BR','Thalita',NULL,'Lindner Munhoz','1003336785678100','440','23-DEC-2016');
+insert into custumer values 
+('itoez@hotmail.com','09-APR-1988',NULL,'Pato Branco Parana BR','Pato Branco BR','Italo',NULL,'Fritzen','1003336722678100','027','24-APR-2014');
+insert into custumer values 
+('manu@hotmail.com','11-MAR-1992',NULL,'Pato Branco Parana BR','Pato Branco BR','Emanoeli',NULL,'Madalosso','4444336785678123','000','29-AUG-2013');
+insert into custumer values 
+('handrey@hotmail.com','19-SEP-1991',NULL,'Sao Joao Parana BR','Sao Joao BR','Handrey','Emanuel','Galon','1003330000678123','583','09-NOV-2016');
+insert into custumer values 
+('helena@hotmail.com','30-OCT-1990',NULL,'Campinas Sao Paulo Brasil','Campinas BR','Helena','Da Silva','Viana','1003336785678121','001','03-MAR-2018');
+
+insert into product values
+(1,'Duofold Womens Silkweight Pant',13.99,'Duofolds lightweight base layer for 365 day protection, good for all seasons this thermal -
+is all about a light next-to -skin performance layer featuring dri-release technology dries 25x faster than cotton',NULL);
+insert into product values
+(2,'Adidas Nylon Cambridge Chronograph Unisex watch ADH2602',54.76,'Casual watch, Quartz movement, Chronograph featuring 30-minute continuous seconds and date',NULL);
+insert into product values
+(3,'Roxy Womens Cambridge Ankle Boot',74.00,'Roxy Cambridge convertible boots. Faux suede upper. Faux fur lining. Functional metal logo snap. Flexible TPR -
+outsole.Imported',' Item Weight: 2 pounds Shipping Weight: 2 pounds (View shipping rates and policies)');
+insert into product values
+(4,'Jessica Rules the Dark Side',10.75,'The highly anticipated sequel to Jessicas Guide to Dating on the Dark Side.','Reading level: Ages 14 and up Hardcover');
+insert into product values
+(5,'Kiwi Suede Protector, 4.25oz',5.71,NULL,' Item Weight: 7.2 ounces Shipping Weight: 3.7 ounces ASIN: B001333OZQ');
+insert into product values
+(6,'Duofold Womens Midweight Long Sleeve 2 Layer Crew With Moisture Wicking',9.99,'Here is your all-purpose everyday use thermal designed for warmth and comfort.- 
+Two-layer protection barrier, combined with a close-to-body fit and softness for superior comfort. Moisture control to stay dry and a tag-free label all with comfort- 
+in mind.','Shipping Weight: 1 pounds Shipping: This item is also available for shipping to select countries outside the U.S. Origin: Imported');
+insert into product values
+(7,'Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal Rosary and Case Enamel Crucifix Exorcism',15.92,'This is a Amazing Saint Benedict Rosary made- 
+with Rare silver antiqued beads of St. Benedict Medals',NULL);
+insert into product values
+(8,'Hearos Xtreme Protection, 14-Pair Foam',14.41,'With a Noise Reduction Rating (NRR) of 33, Hearos Xtreme Protection ear plugs are perfect for blocking out -  
+unwanted or damaging noise',NULL);
+insert into product values
+(9,'Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and Carry Pouch, Black',8.95,'Light as a feather, slim-line and very stylish, the sweet -
+dreams sleep and relaxation mask is a molded contoured sleep aid that offers full comfort without any pressure to the eyes',NULL);
+insert into product values
+(10,'Ollio Womens Ballet Flat Loafers Cute Comfort Glitter Low Heels Multi Colored Shoes',16.99,'OLLIO is a well established fashion shoe brand over 10 years which -
+carries stylish and affordable womens footwear',NULL);
+insert into product values
+(11,'NB Leila-12 Spiked Loafer Flats',27.25,NULL,NULL);
+insert into product values
+(12,'Qupid Strip-56 Studded Round Toe Loafer Flat BLACK',28.99,NULL,NULL);
+insert into product values
+(13,'BookFactory® Black Engineering Notebook - 96 Pages',16.99,NULL,NULL);
+insert into product values
+(14,'100 LED Multi-color Christmas Light Mix-color Holiday String Lights',6.55,NULL,NULL);
+insert into product values
+(15,'Oracle 10g Programming: A Primer',41.88,'racle 10G Programming is a concise, streamlined guide to Oracle programming. It is ideal for students studying-  
+databases',NULL);
+insert into product values
+(16,'Fundamentals of Database Systems',116.01,'Clear explanations of theory and design, broad coverage of models and real systems','Hardcover: 1200 pages');
+insert into product values
+(17,'Artificial Intelligence: Structures and Strategies for Complex Problem Solving',118.44,'is ideal for a one- or two-semester undergraduate course on AI',
+'Hardcover: 784 pages');
+insert into product values
+(18,'Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook',989.67,NULL,'Product Dimensions: 8.9 x 12.7 x 0.7 inches ; 3.5 pounds');
+insert into product values
+(19,'Tron: Legacy',16.99,'DVD','Blue-Ray');
+insert into product values
+(20,'Angry Birds Star Wars 5 Plush - Darth Vader',14.99,NULL,NULL);
+
+insert into whishlist values
+(3,'i want so much',0,'high','joao@hotmail.com',19);
+insert into whishlist values
+(1,NULL,0,NULL,'maria@hotmail.com',7);
+insert into whishlist values
+(1,'love it',1,NULL,'n.poison@hotmail.com',3);
+insert into whishlist values
+(1,'i like the colors',0,NULL,'itoez@hotmail.com',2);
+insert into whishlist values
+(2,'so cute',0,NULL,'carla@hotmail.com',20);
+insert into whishlist values
+(5,NULL,0,NULL,'marcela@hotmail.com',12);
+insert into whishlist values
+(1,NULL,0,NULL,'naye.ferreira@hotmail.com',7);
+insert into whishlist values
+(3,NULL,2,NULL,'nelson@hotmail.com',13);
+insert into whishlist values
+(1,NULL,0,NULL,'babye@hotmail.com',5);
+insert into whishlist values
+(1,NULL,0,NULL,'thalita@hotmail.com',6);
+insert into whishlist values
+(4,NULL,0,NULL,'lais@hotmail.com',8);
+insert into whishlist values
+(1,NULL,0,NULL,'lucas@hotmail.com',2);
+insert into whishlist values
+(1,NULL,0,NULL,'ieda@hotmail.com',7);
+insert into whishlist values
+(1,NULL,0,NULL,'paulo@hotmail.com',7);
+insert into whishlist values
+(1,NULL,0,NULL,'leonardo@hotmail.com',2);
+insert into whishlist values
+(3,NULL,0,NULL,'pedro@hotmail.com',2);
+insert into whishlist values
+(1,NULL,0,NULL,'paulo@hotmail.com',2);
+insert into whishlist values
+(1,'veloz,quero muito um',0,NULL,'paulo@hotmail.com',18);
+insert into whishlist values
+(1,NULL,0,NULL,'manu@hotmail.com',18);
+insert into whishlist values
+(1,'sonho de todo engenheiro',0,NULL,'handrey@hotmail.com',18);
+insert into whishlist values
+(1,'lindo',0,NULL,'helena@hotmail.com',18);
+
+insert into buy values
+(1,1,'n.poison@hotmail.com','12-JUN-2012');
+insert into buy values
+(2,18,'maria@hotmail.com','13-JUN-2012');
+insert into buy values
+(1,2,'pedro@hotmail.com','15-AUG-2012');
+insert into buy values
+(1,20,'ieda@hotmail.com','23-FEB-2012');
+insert into buy values
+(1,19,'handrey@hotmail.com','01-MAR-2012');
+insert into buy values
+(1,9,'leandra@hotmail.com','09-JUL-2012');
+insert into buy values
+(1,4,'babye@hotmail.com','17-OCT-2012');
+insert into buy values
+(1,5,'thalita@hotmail.com','08-JAN-2010');
+insert into buy values
+(1,6,'carlos@hotmail.com','05-MAY-2009');
+insert into buy values
+(1,8,'carla@hotmail.com','09-NOV-2011');
+insert into buy values
+(1,10,'n.poison@hotmail.com','12-JUN-2011');
+insert into buy values
+(3,11,'n.poison@hotmail.com','12-JUN-2012');
+insert into buy values
+(1,18,'itoez@hotmail.com','14-DEC-2011');
+insert into buy values
+(1,3,'marcela@hotmail.com','18-SEP-2012');
+insert into buy values
+(1,9,'manu@hotmail.com','20-FEB-2012');
+insert into buy values
+(1,15,'n.poison@hotmail.com','12-AUG-2012');
+insert into buy values
+(1,16,'n.poison@hotmail.com','12-AUG-2012');
+insert into buy values
+(1,17,'n.poison@hotmail.com','12-AUG-2012');
+insert into buy values
+(1,14,'nelson@hotmail.com','21-APR-2012');
+insert into buy values
+(1,14,'helena@hotmail.com','01-NOV-2012');
+
+insert into review values
+(5,'Awesome','Great fit, silky soft does not rise up to high nor to low  Will buy more o these in the future ',1,'n.poison@hotmail.com');
+insert into review values
+(4,'Extremely pleased though its early days','The T13 arrived a couple of hours ago one day ahead of Fed-Exs promised arrival date  First impressions are -
+positive it is blazingly fast',18,'maria@hotmail.com');
+insert into review values
+(4,'AMAZING PERFORMANCE and VALUE','This is a well-designed and well built Ultra laptop  Near perfection and even more so when you factor in the -  
+price',18,'itoez@hotmail.com'); 
+insert into review values
+(4,'Beatiful','It works well and its fancy',2,'pedro@hotmail.com');
+insert into review values
+(4,'Lovely','I bought this to my kid and he love it!',20,'ieda@hotmail.com');
+insert into review values
+(5,'Wonderful, comfortable eye shades for indoors','The eye mask blocks out all of the light and is very comfortable on my face ',9,'leandra@hotmail.com');
+insert into review values
+(5,'High qualtiy 3D Blu Ray','Good acting and story, great special effects and action ',19,'handrey@hotmail.com');
+insert into review values
+(5,'I Really Liked This Book','This book has well fleshed out characters a great story line',4,'babye@hotmail.com');
+insert into review values
+(5,'repells water and dirt ','This is the best I found',5,'thalita@hotmail.com');
+insert into review values
+(4,'A good Basic layer','I bought this to my wife and she liked',6,'carlos@hotmail.com');
+insert into review values
+(5,'blissful silence','now i can sleep',8,'carla@hotmail.com');
+insert into review values
+(4,'Super cute!','Cute and confortable',10,'n.poison@hotmail.com');
+insert into review values
+(3,'They are ok','They are super fashion I love the skype but they are kind of small for me',11,'n.poison@hotmail.com');
+insert into review values
+(5,'I LOVE THEM','These boots are the most comfortable, warm boots Ive ever had!',3,'marcela@hotmail.com');
+insert into review values
+(5,'Perfect','They fit perfect on my face and are very confee',9,'manu@hotmail.com');
+insert into review values
+(5,'Good','Good book,good content',15,'n.poison@hotmail.com');
+insert into review values
+(5,'Good book','I would recommend it!',16,'n.poison@hotmail.com');
+insert into review values
+(5,'I like it','Good book!',17,'n.poison@hotmail.com');
+insert into review values
+(5,'A Mezmerizing Light Show!','The lights look great if they are working ',14,'nelson@hotmail.com');
+insert into review values
+(5,'Very Vivid Lights','I purchased one string of these lights just to see if I liked them I must say, They are the BOMB!',14,'helena@hotmail.com');
+
+
+SELECTING TABLE CUSTUMER
+EMAIL                          BIRTHDATE CELLPHONE#
+------------------------------ --------- ----------
+n.poison@hotmail.com           08-FEB-91
+naye.ferreira@hotmail.com      08-FEB-92
+joao@hotmail.com               10-JUN-80
+maria@hotmail.com              15-JUN-54
+nelson@hotmail.com             27-OCT-51
+lais@hotmail.com               30-NOV-88
+lucas@hotmail.com              09-JUL-88
+carlos@hotmail.com             13-SEP-60
+ieda@hotmail.com               22-MAR-62
+leonardo@hotmail.com           05-JUN-92
+carla@hotmail.com              30-OCT-95
+
+EMAIL                          BIRTHDATE CELLPHONE#
+------------------------------ --------- ----------
+pedro@hotmail.com              07-AUG-72
+leandra@hotmail.com            11-DEC-73
+paulo@hotmail.com              13-FEB-75
+marcela@hotmail.com            01-JAN-76
+babye@hotmail.com              27-MAR-81
+thalita@hotmail.com            10-JAN-83
+itoez@hotmail.com              09-APR-88
+manu@hotmail.com               11-MAR-92
+handrey@hotmail.com            19-SEP-91
+helena@hotmail.com             30-OCT-90
+
+21 rows selected.
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Athens Ohio
+Athens
+Ohio
+Nayara                          Oliva
+                                Ferreira
+
+Athens Ohio
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Athens
+Ohio
+Nagyla          Oliva           Ferreira
+
+Athens Ohio
+Athens
+Ohio
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Joao                            da Silva
+
+Campina da Lagoa
+Compina da
+Lagoa BR
+Maria           Joana           Oliva
+                                Bilesk
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+
+Campina da Lagoa
+Compina da
+Lagoa BR
+Nelson                          Bilesk
+
+Campina da Lagoa
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Compina da
+Lagoa BR
+Lais                            Oliva
+                                Bilesk
+
+Campina da Lagoa
+Compina da
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Lagoa BR
+Lucas                           Oliva
+                                Bilesk
+
+Maringa Parana BR
+Maringa
+BR
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Carlos                          Ferreira
+
+Maringa Parana BR
+Maringa
+BR
+Ieda                            Prates Ferreira
+
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Maringa Parana BR
+Maringa
+BR
+Leonardo                        Prates
+                                Ferreira
+
+Maringa Parana BR
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Maringa
+BR
+Carla                           Prates Ferreira
+
+Iretama Parana BR
+Iretama
+BR
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Pedro                           Oliva
+
+Compo Mourao Parana
+BR
+Campo Mourao BR
+Leandra                         Oliva
+
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Assis Chateaubriand Parana
+BR
+Assis Chateaubriand
+BR
+Paulo                           Oliva
+
+Assis Chateaubriand Parana
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+BR
+Assis Chateaubriand
+BR
+Marcela                         Valentino
+
+Campo Mourao Parana BR
+Campo
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Mourao BR
+Babye                           Lindner
+                                Munhoz
+
+Campo Mourao Parana
+BR
+Campo Mourao BR
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Thalita                         Lindner
+                                Munhoz
+
+Pato Branco Parana BR
+Pato
+Branco BR
+Italo                           Fritzen
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+
+Pato Branco Parana BR
+Pato
+Branco
+BR
+Emanoeli                        Madalosso
+
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Sao Joao Parana BR
+Sao Joao
+BR
+Handrey         Emanuel         Galon
+
+Campinas Sao Paulo
+Brasil
+
+SHIPPINGADDRESS
+--------------------------------------------------------------------------------
+BILLINGADDRESS
+--------------------------------------------------------------------------------
+FNAME           MNAME           LNAME
+--------------- --------------- --------------------
+Campinas BR
+Helena          Da              Viana
+                Silva
+
+
+21 rows selected.
+
+
+CREDITCARD# CARDSECURITY# CARDEXPIR
+----------- ------------- ---------
+ 1.2346E+15           123 15-JAN-15
+ 1.2346E+15           123 16-JAN-15
+ 1.2346E+15           123 15-JAN-15
+ 1.2346E+15           563 05-FEB-13
+ 1.2346E+15           563 05-FEB-13
+ 1.2336E+15           583 07-FEB-13
+ 2.3357E+14           983 14-MAY-20
+ 3.5679E+11            83 15-MAY-14
+ 3.5112E+11            93 15-MAY-14
+ 1.0004E+15           783 30-MAY-15
+ 1.2004E+15           703 03-MAR-13
+
+CREDITCARD# CARDSECURITY# CARDEXPIR
+----------- ------------- ---------
+ 2.0004E+15           983 21-JUN-17
+ 1.2204E+15           787 22-AUG-15
+ 1.0033E+15           183 15-SEP-15
+ 1.4444E+15           103 25-DEC-13
+ 2.2033E+15           340 12-NOV-17
+ 1.0033E+15           440 23-DEC-16
+ 1.0033E+15            27 24-APR-14
+ 4.4443E+15             0 29-AUG-13
+ 1.0033E+15           583 09-NOV-16
+ 1.0033E+15             1 03-MAR-18
+
+21 rows selected.
+
+
+
+
+SELECTING TABLE PRODUCT
+
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+         4
+Jessica Rules the Dark Side
+
+         1
+Duofold Womens Silkweight Pant
+
+         5
+Kiwi Suede Protector, 4.25oz
+
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+         6
+Duofold Womens Midweight Long Sleeve 2 Layer Crew With Moisture
+Wicking
+
+         7
+Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal
+Rosary and Case Enamel Crucifix Exorcism
+
+         8
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+Hearos Xtreme Protection, 14-Pair Foam
+
+         9
+Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and
+Carry Pouch, Black
+
+        10
+Ollio Womens Ballet Flat Loafers Cute Comfort Glitter Low Heels
+Multi Colored Shoes
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+
+        11
+NB Leila-12 Spiked Loafer Flats
+
+        12
+Qupid Strip-56 Studded Round Toe Loafer Flat
+BLACK
+
+        13
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+BookFactory? Black Engineering Notebook - 96
+Pages
+
+        14
+100 LED Multi-color Christmas Light Mix-color Holiday String
+Lights
+
+        15
+Oracle 10g Programming: A Primer
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+
+        16
+Fundamentals of Database Systems
+
+        17
+Artificial Intelligence: Structures and Strategies for Complex
+Problem Solving
+
+        19
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+Tron: Legacy
+
+        20
+Angry Birds Star Wars 5 Plush - Darth Vader
+
+        18
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+
+         2
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+
+         3
+Roxy Womens Cambridge Ankle Boot
+
+
+20 rows selected.
+
+
+
+20 rows selected.
+
+select * from whishlist;
+DESRIPTION
+--------------------------------------------------------------------------------
+DETAILS
+--------------------------------------------------------------------------------
+
+
+         3
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+DETAILS
+--------------------------------------------------------------------------------
+Roxy Womens Cambridge Ankle Boot
+        74
+Roxy Cambridge convertible boots. Faux suede upper. Faux fur lining. Functional
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+DETAILS
+--------------------------------------------------------------------------------
+metal logo snap. Flexible TPR -
+outsole.Imported
+ Item Weight: 2 pounds Shipping Weight: 2 pounds (View shipping rates and polici
+
+        ID
+----------
+TITLE
+--------------------------------------------------------------------------------
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+DETAILS
+--------------------------------------------------------------------------------
+es)
+
+
+20 rows selected.
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+     10.75
+The highly anticipated sequel to
+Jessicas Guide to Dating on the Dark Side.
+
+     13.99
+Duofolds lightweight base
+layer for 365 day protection, good for all seasons this thermal -
+is all about a light next-to -skin performance layer featuring
+dri-release technology dries 25x faster than cotton
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+
+      5.71
+
+
+      9.99
+Here is your all-purpose everyday use thermal designed
+for warmth and comfort.-
+Two-layer protection barrier, combined with a close-to-body fit and
+softness for superior comfort. Moisture control to stay dry and a
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+tag-free label all with comfort-
+in mind.
+
+     15.92
+This is a Amazing Saint
+Benedict Rosary made-
+with Rare silver antiqued beads of St. Benedict Medals
+
+     14.41
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+With a Noise
+Reduction Rating (NRR) of 33, Hearos Xtreme Protection ear plugs are
+perfect for blocking out -
+unwanted or damaging noise
+
+      8.95
+Light as a feather, slim-line and very
+stylish, the sweet -
+dreams sleep and relaxation mask is a molded contoured sleep aid that
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+offers full comfort without any pressure to the eyes
+
+     16.99
+OLLIO is a well established fashion shoe
+brand over 10 years which -
+carries stylish and affordable womens footwear
+
+     27.25
+
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+
+     28.99
+
+
+     16.99
+
+
+      6.55
+
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+
+     41.88
+racle 10G Programming is a
+concise, streamlined guide to Oracle programming. It is ideal for
+students studying-
+databases
+
+    116.01
+Clear explanations of
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+theory and design, broad coverage of models and real
+systems
+
+    118.44
+is ideal for a one- or two-semester
+undergraduate course on AI
+
+     16.99
+DVD
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+
+     14.99
+
+
+    989.67
+
+
+     54.76
+Casual watch, Quartz movement, Chronograph featuring 30-minute continuous second
+
+     PRICE
+----------
+DESRIPTION
+--------------------------------------------------------------------------------
+s and date
+
+        74
+Roxy Cambridge convertible boots. Faux suede upper. Faux fur lining. Functional
+metal logo snap. Flexible TPR -
+outsole.Imported
+
+
+20 rows selected.
+
+DETAILS
+--------------------------------------------------------------------------------
+Reading level: Ages 14 and
+up Hardcover
+
+
+ Item Weight: 7.2 ounces
+Shipping Weight: 3.7 ounces ASIN: B001333OZQ
+
+Shipping Weight: 1 pounds Shipping: This item is also
+available for shipping to select countries outside the U.S. Origin:
+Imported
+
+
+DETAILS
+--------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+Hardcover: 1200 pages
+Hardcover: 784 pages
+
+DETAILS
+--------------------------------------------------------------------------------
+Blue-Ray
+
+Product Dimensions: 8.9 x 12.7 x 0.7 inches ; 3.5 pounds
+
+ Item Weight: 2 pounds Shipping Weight: 2 pounds (View shipping rates and polici
+es)
+
+
+20 rows selected.
+
+
+SELECTING TABLE WHISHLIST
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         1
+love it
+
+         1
+i like the colors
+
+         1
+
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         1
+
+
+         3
+
+
+         1
+
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         1
+veloz,quero muito um
+
+         1
+
+
+         1
+sonho de todo engenheiro
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         1
+lindo
+
+         3
+i want so much
+
+         1
+
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         2
+so cute
+
+         5
+
+
+         1
+
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         3
+
+
+         1
+
+
+         1
+
+
+
+  QUANTITY
+----------
+COMMENTARIES
+--------------------------------------------------------------------------------
+         4
+
+
+         1
+
+
+         1
+
+
+
+21 rows selected.
+
+
+ RECEIVED# PRIORITY   EMAILW                                IDW
+---------- ---------- ------------------------------ ----------
+         1            n.poison@hotmail.com                    3
+         0            itoez@hotmail.com                       2
+         0            lucas@hotmail.com                       2
+         0            leonardo@hotmail.com                    2
+         0            pedro@hotmail.com                       2
+         0            paulo@hotmail.com                       2
+         0            paulo@hotmail.com                      18
+         0            manu@hotmail.com                       18
+         0            handrey@hotmail.com                    18
+         0            helena@hotmail.com                     18
+         0 high       joao@hotmail.com                       19
+
+ RECEIVED# PRIORITY   EMAILW                                IDW
+---------- ---------- ------------------------------ ----------
+         0            maria@hotmail.com                       7
+         0            carla@hotmail.com                      20
+         0            marcela@hotmail.com                    12
+         0            naye.ferreira@hotmail.com               7
+         2            nelson@hotmail.com                     13
+         0            babye@hotmail.com                       5
+         0            thalita@hotmail.com                     6
+         0            lais@hotmail.com                        8
+         0            ieda@hotmail.com                        7
+         0            paulo@hotmail.com                       7
+
+21 rows selected.
+
+SELECTING TABLE BUY
+
+SQL>  select * from buy;
+
+ QUANTITYB        IDB EMAILB                         DATET
+---------- ---------- ------------------------------ ---------
+         2         18 maria@hotmail.com              13-JUN-12
+         1          2 pedro@hotmail.com              15-AUG-12
+         1          4 babye@hotmail.com              17-OCT-12
+         1         18 itoez@hotmail.com              14-DEC-11
+         1          3 marcela@hotmail.com            18-SEP-12
+         1          1 n.poison@hotmail.com           12-JUN-12
+         1         20 ieda@hotmail.com               23-FEB-12
+         1         19 handrey@hotmail.com            01-MAR-12
+         1          9 leandra@hotmail.com            09-JUL-12
+         1          5 thalita@hotmail.com            08-JAN-10
+         1          6 carlos@hotmail.com             05-MAY-09
+
+ QUANTITYB        IDB EMAILB                         DATET
+---------- ---------- ------------------------------ ---------
+         1          8 carla@hotmail.com              09-NOV-11
+         1         10 n.poison@hotmail.com           12-JUN-11
+         3         11 n.poison@hotmail.com           12-JUN-12
+         1          9 manu@hotmail.com               20-FEB-12
+         1         15 n.poison@hotmail.com           12-AUG-12
+         1         16 n.poison@hotmail.com           12-AUG-12
+         1         17 n.poison@hotmail.com           12-AUG-12
+         1         14 nelson@hotmail.com             21-APR-12
+         1         14 helena@hotmail.com             01-NOV-12
+
+SELECTING TABLES REVIEW
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         4
+Extremely pleased though its early days
+
+         4
+AMAZING PERFORMANCE and VALUE
+
+         4
+Beatiful
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         5
+I Really Liked This Book
+
+         5
+I LOVE THEM
+
+         5
+Awesome
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         4
+Lovely
+
+         5
+Wonderful, comfortable eye shades for indoors
+
+         5
+High qualtiy 3D Blu Ray
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         5
+repells water and dirt
+
+         4
+A good Basic layer
+
+         5
+blissful silence
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         4
+Super cute!
+
+         3
+They are ok
+
+         5
+Perfect
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         5
+Good
+
+         5
+Good book
+
+         5
+I like it
+
+
+      RATE
+----------
+TITLER
+--------------------------------------------------------------------------------
+         5
+A Mezmerizing Light Show!
+
+         5
+Very Vivid Lights
+
+
+20 rows selected.
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+The T13 arrived a couple
+of hours ago one day ahead of Fed-Exs promised arrival date  First
+impressions are -
+positive it is blazingly fast
+        18
+
+This is a well-designed and well
+built Ultra laptop  Near perfection and even more so when you factor in
+the -
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+price
+        18
+
+It works well and its fancy
+         2
+
+This book has well fleshed out characters
+a great story line
+         4
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+
+These boots are the most comfortable, warm boots Ive
+ever had!
+         3
+
+Great fit, silky soft does not rise up to high nor to low
+Will buy more o these in the future
+         1
+
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+I bought this to my kid and he love
+it!
+        20
+
+The eye mask blocks
+out all of the light and is very comfortable on my face
+         9
+
+Good acting and story, great special
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+effects and action
+        19
+
+This is the best I
+found
+         5
+
+I bought this to my wife and she
+liked
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+         6
+
+now i can sleep
+         8
+
+Cute and confortable
+        10
+
+They are super fashion I love the skype but they are
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+kind of small for me
+        11
+
+They fit perfect on my face and are very
+confee
+         9
+
+Good book,good content
+        15
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+
+I would recommend it!
+        16
+
+Good book!
+        17
+
+The lights look great if they are
+working
+
+COMMENTS
+--------------------------------------------------------------------------------
+       IDR
+----------
+        14
+
+I purchased one string of these lights just to
+see if I liked them I must say, They are the
+BOMB!
+        14
+
+
+20 rows selected.
+EMAILR
+------------------------------
+babye@hotmail.com
+carla@hotmail.com
+carlos@hotmail.com
+handrey@hotmail.com
+helena@hotmail.com
+ieda@hotmail.com
+itoez@hotmail.com
+leandra@hotmail.com
+manu@hotmail.com
+marcela@hotmail.com
+maria@hotmail.com
+
+EMAILR
+------------------------------
+n.poison@hotmail.com
+n.poison@hotmail.com
+n.poison@hotmail.com
+n.poison@hotmail.com
+n.poison@hotmail.com
+n.poison@hotmail.com
+nelson@hotmail.com
+pedro@hotmail.com
+thalita@hotmail.com
+
+20 rows selected.
+
+Representative SQL 
+1- Know what product - title - each custumer bought
+select title
+from product, buy
+where idb=id;
+TITLE
+--------------------------------------------------------------------------------
+Jessica Rules the Dark Side
+Hearos Xtreme Protection, 14-Pair Foam
+Duofold Womens Midweight Long Sleeve 2 Layer Crew With Moisture
+Wicking
+
+Tron: Legacy
+100 LED Multi-color Christmas Light Mix-color Holiday String
+Lights
+
+Angry Birds Star Wars 5 Plush - Darth Vader
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+
+TITLE
+--------------------------------------------------------------------------------
+Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and
+Carry Pouch, Black
+
+Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and
+Carry Pouch, Black
+
+Roxy Womens Cambridge Ankle Boot
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+Duofold Womens Silkweight Pant
+Ollio Womens Ballet Flat Loafers Cute Comfort Glitter Low Heels
+Multi Colored Shoes
+
+TITLE
+--------------------------------------------------------------------------------
+
+NB Leila-12 Spiked Loafer Flats
+Oracle 10g Programming: A Primer
+Fundamentals of Database Systems
+Artificial Intelligence: Structures and Strategies for Complex
+Problem Solving
+
+100 LED Multi-color Christmas Light Mix-color Holiday String
+Lights
+
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+
+TITLE
+--------------------------------------------------------------------------------
+Kiwi Suede Protector, 4.25oz
+
+2- Know name of the products desired 
+select title
+from product,whishlist
+where id=idw;
+
+
+TITLE
+--------------------------------------------------------------------------------
+Kiwi Suede Protector, 4.25oz
+Angry Birds Star Wars 5 Plush - Darth Vader
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal
+Rosary and Case Enamel Crucifix Exorcism
+
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+Tron: Legacy
+Hearos Xtreme Protection, 14-Pair Foam
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+
+TITLE
+--------------------------------------------------------------------------------
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+Qupid Strip-56 Studded Round Toe Loafer Flat
+BLACK
+
+Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal
+Rosary and Case Enamel Crucifix Exorcism
+
+Roxy Womens Cambridge Ankle Boot
+Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal
+Rosary and Case Enamel Crucifix Exorcism
+
+TITLE
+--------------------------------------------------------------------------------
+
+BookFactory? Black Engineering Notebook - 96
+Pages
+
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+Mens Womens Silver Plate Gild Antiqued Saint St Benedict Icon Medal
+Rosary and Case Enamel Crucifix Exorcism
+
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+Duofold Womens Midweight Long Sleeve 2 Layer Crew With Moisture
+
+TITLE
+--------------------------------------------------------------------------------
+Wicking
+
+
+21 rows selected.
+
+
+
+
+3-Select first name,the title of the product they made a review and select the rate they gave to the product.
+
+SQL> select fname, title , rate
+  2  from custumer,product,review
+  3  where idr=id and emailr=email;
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Maria
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+         4
+
+Italo
+Sony VAIO T Series SVT13116FXS 13.3-Inch Ultrabook
+         4
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+
+Pedro
+Adidas Nylon Cambridge Chronograph Unisex watch ADH2602
+         4
+
+Babye
+Jessica Rules the Dark Side
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+         5
+
+Marcela
+Roxy Womens Cambridge Ankle Boot
+         5
+
+Nayara
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Duofold Womens Silkweight Pant
+         5
+
+Ieda
+Angry Birds Star Wars 5 Plush - Darth Vader
+         4
+
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Leandra
+Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and
+Carry Pouch, Black
+         5
+
+Handrey
+Tron: Legacy
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+         5
+
+Thalita
+Kiwi Suede Protector, 4.25oz
+         5
+
+Carlos
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Duofold Womens Midweight Long Sleeve 2 Layer Crew With Moisture
+Wicking
+         4
+
+Carla
+Hearos Xtreme Protection, 14-Pair Foam
+         5
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+
+Nayara
+Ollio Womens Ballet Flat Loafers Cute Comfort Glitter Low Heels
+Multi Colored Shoes
+         4
+
+Nayara
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+NB Leila-12 Spiked Loafer Flats
+         3
+
+Emanoeli
+Dream Essentials Sweet Dreams Contoured Sleep Mask with Earplugs and
+Carry Pouch, Black
+         5
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+
+Nayara
+Oracle 10g Programming: A Primer
+         5
+
+Nayara
+Fundamentals of Database Systems
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+         5
+
+Nayara
+Artificial Intelligence: Structures and Strategies for Complex
+Problem Solving
+         5
+
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Nelson
+100 LED Multi-color Christmas Light Mix-color Holiday String
+Lights
+         5
+
+Helena
+100 LED Multi-color Christmas Light Mix-color Holiday String
+
+FNAME
+---------------
+TITLE
+--------------------------------------------------------------------------------
+      RATE
+----------
+Lights
+         5
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	
